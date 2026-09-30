@@ -71,4 +71,89 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start typing effect after short delay
     setTimeout(type, 1000);
+
+    // LeetCode Activity Map Logic
+    const leetcodeMap = document.getElementById('leetcode-map');
+    const revealBtn = document.getElementById('reveal-map-btn');
+    const activityGrid = document.getElementById('activity-grid');
+
+    if (revealBtn && leetcodeMap) {
+        revealBtn.addEventListener('click', () => {
+            leetcodeMap.classList.remove('collapsed');
+        });
+    }
+
+    async function fetchLeetcodeData() {
+        if (!activityGrid) return;
+        try {
+            const response = await fetch('https://alfa-leetcode-api.onrender.com/pranav-navandar/calendar');
+            const data = await response.json();
+            if (data.submissionCalendar) {
+                const calendar = JSON.parse(data.submissionCalendar);
+                renderActivityMap(calendar);
+            }
+        } catch (error) {
+            console.error('Error fetching LeetCode data:', error);
+            activityGrid.innerHTML = '<p style="color: var(--text-secondary); padding: 1rem;">Failed to load activity map.</p>';
+        }
+    }
+
+    function renderActivityMap(calendarData) {
+        // Calculate the last 365 days
+        const today = new Date();
+        const oneYearAgo = new Date(today);
+        oneYearAgo.setFullYear(today.getFullYear() - 1);
+        
+        // Find the next Sunday from one year ago to align columns properly
+        while (oneYearAgo.getDay() !== 0) {
+            oneYearAgo.setDate(oneYearAgo.getDate() + 1);
+        }
+
+        const days = [];
+        let current = new Date(oneYearAgo);
+        
+        while (current <= today) {
+            days.push(new Date(current));
+            current.setDate(current.getDate() + 1);
+        }
+
+        activityGrid.innerHTML = '';
+
+        days.forEach(day => {
+            // Convert to unix timestamp string at midnight UTC roughly matching LeetCode format
+            const timestampStart = Math.floor(new Date(day.setHours(0,0,0,0)).getTime() / 1000);
+            const timestampEnd = timestampStart + 86400;
+            
+            let submissions = 0;
+            // Search calendar for matching day
+            for (const [ts, count] of Object.entries(calendarData)) {
+                if (ts >= timestampStart && ts < timestampEnd) {
+                    submissions += count;
+                }
+            }
+
+            const box = document.createElement('div');
+            box.classList.add('activity-box');
+            
+            // Add tooltip as native title
+            const dateStr = day.toLocaleDateString();
+            box.title = `${submissions} submissions on ${dateStr}`;
+
+            if (submissions > 0 && submissions <= 2) box.classList.add('level-1');
+            else if (submissions > 2 && submissions <= 5) box.classList.add('level-2');
+            else if (submissions > 5 && submissions <= 8) box.classList.add('level-3');
+            else if (submissions > 8) box.classList.add('level-4');
+            else box.classList.add('level-0');
+
+            activityGrid.appendChild(box);
+        });
+
+        // Scroll to the end (most recent)
+        const scrollWrapper = document.querySelector('.map-scroll-wrapper');
+        if (scrollWrapper) {
+            scrollWrapper.scrollLeft = scrollWrapper.scrollWidth;
+        }
+    }
+
+    fetchLeetcodeData();
 });
