@@ -11,8 +11,8 @@
   <meta property="og:url" content="https://pranavnavandar.me/">
   <link rel="canonical" href="https://pranavnavandar.me/">
   <title>Pranav Navandar — Software Developer</title>
-  <link rel="stylesheet" href="style.css?v=portfolio-redesign-1">
-  <script src="script.js?v=portfolio-redesign-1" defer></script>
+  <link rel="stylesheet" href="style.css?v=portfolio-redesign-2">
+  <script src="script.js?v=portfolio-redesign-2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -54,6 +54,7 @@
           <div><dt>Studying</dt><dd>B.Tech, Information Technology</dd></div>
           <div><dt>Graduating</dt><dd>2027</dd></div>
           <div><dt>CGPA</dt><dd>9.25</dd></div>
+          <div><dt>Problem solving</dt><dd>850+ questions</dd></div>
         </dl>
       </aside>
     </section>
@@ -118,10 +119,10 @@
             <h3>AutoSearch Engine</h3>
             <p>A typo-tolerant search core that combines Trie prefix retrieval, BK-tree approximate matching, and QWERTY-aware weighted distance to rank suggestions by intent.</p>
             <ul class="project-points">
-              <li>Thread-safe O(1) LRU cache for recurring queries</li>
+              <li>Sub-0.1 ms cached query latency with a thread-safe O(1) LRU</li>
               <li>Native REST API, benchmark CLI, and React interface</li>
             </ul>
-            <div class="tag-list"><span>C++17</span><span>Trie</span><span>BK-tree</span><span>Docker</span></div>
+            <div class="tag-list"><span>C++20</span><span>Trie</span><span>BK-tree</span><span>Docker</span></div>
           </div>
           <a class="project-link" href="https://github.com/gitpranaav/spellchecker" target="_blank" rel="noreferrer" aria-label="View AutoSearch Engine on GitHub">View repository <span aria-hidden="true">↗</span></a>
           <div class="project-visual visual-search" aria-hidden="true">
@@ -139,7 +140,7 @@
             <h3>MediFlow</h3>
             <p>An AI-assisted outpatient documentation platform that turns live consultations into structured EMR data while keeping clinical review and safety checks in the loop.</p>
             <ul class="project-points">
-              <li>Live transcription with incremental EMR extraction</li>
+              <li>Reduced documentation time from 45% of a visit to 20%</li>
               <li>Allergy warnings, audit trails, and patient history</li>
             </ul>
             <div class="tag-list"><span>Next.js</span><span>TypeScript</span><span>MongoDB</span><span>Groq</span><span>Deepgram</span></div>
@@ -184,17 +185,38 @@
           <span class="card-label">Experience</span>
           <p class="card-date">Sep — Nov 2025</p>
           <h3>Project Intern · Sumago Infotech</h3>
-          <p>Built AgriFlow, a smart agriculture and water-resource optimization system, including deterministic crop-planning logic and a hybrid RAG pipeline evaluated across a 100-query dataset.</p>
+          <p>Built AgriFlow, a smart agriculture and water-resource optimization system. Its hybrid RAG pipeline combined Pinecone, weather, and mandi-market data, reaching a 0.823 SBERT score across 100 evaluation queries.</p>
         </article>
         <article class="profile-card">
           <span class="card-label">Education</span>
           <h3>B.Tech in Information Technology</h3>
-          <p>Vishwakarma Institute of Technology, Pune<br>2023 — 2027 · CGPA 9.25</p>
+          <p>Vishwakarma Institute of Technology, Pune<br>2023 — 2027 · CGPA 9.25 · Top 10 in the department</p>
         </article>
-        <article class="profile-card">
+        <article class="profile-card credential-card">
+          <span class="card-label">Credentials</span>
+          <h3>Selected certifications</h3>
+          <ul class="credential-list">
+            <li><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/P2IL8OK2XLUI" target="_blank" rel="noreferrer">IBM DevOps &amp; Software Engineering <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://www.credly.com/badges/5d93fa7a-9adb-4577-9856-b7344b4abea9" target="_blank" rel="noreferrer">AWS Academy Cloud Foundations <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://www.coursera.org/account/accomplishments/verify/ANL5QR2KUCMD" target="_blank" rel="noreferrer">DeepLearning.AI Machine Learning <span aria-hidden="true">↗</span></a></li>
+          </ul>
+        </article>
+        <article class="profile-card profile-card-full recognition-card">
           <span class="card-label">Recognition</span>
-          <h3>Hackathon podiums</h3>
-          <p>Best Pitch, 2nd place at COEP CSI INSPIRON 4.0 (400+ teams). Best Presentation, 3rd place at MVPM Heera Software Startup Hackathon (100+ teams).</p>
+          <div class="recognition-grid">
+            <figure>
+              <img src="assets/recognition/inspiron-best-pitch.png" alt="Best Pitch certificate from COEP CSI INSPIRON 4.0" loading="lazy">
+              <figcaption><strong>Best Pitch · 2nd place</strong><span>COEP CSI INSPIRON 4.0 · AutomateInvoice · 1,200+ teams · Mar 2025</span></figcaption>
+            </figure>
+            <figure>
+              <img src="assets/recognition/mvpm-hackathon.png" alt="MVPM Software Startup Hackathon 2026 certificate" loading="lazy">
+              <figcaption><strong>Best Presentation · 3rd place</strong><span>MVPM Software Startup Hackathon · MediFlow · 100+ teams · Apr 2026</span></figcaption>
+            </figure>
+            <figure>
+              <img src="assets/recognition/smart-india-hackathon.png" alt="Internal Smart India Hackathon 2025 winner certificate" loading="lazy">
+              <figcaption><strong>Internal hackathon winner</strong><span>Smart India Hackathon 2025 · Team Queue&lt;T&gt;π</span></figcaption>
+            </figure>
+          </div>
         </article>
         <article class="profile-card profile-card-wide toolbox-card">
           <span class="card-label">Toolbox</span>
@@ -204,6 +226,17 @@
             <div><h3>Data & systems</h3><p>MongoDB · MySQL · SQLite · Docker · Git</p></div>
           </div>
         </article>
+        <article class="profile-card profile-card-full profiles-card">
+          <span class="card-label">Coding &amp; research profiles</span>
+          <div class="profile-link-grid">
+            <a href="https://codolio.com/profile/allinone" target="_blank" rel="noreferrer"><strong>Codolio</strong><span>850+ questions · consolidated profile ↗</span></a>
+            <a href="https://leetcode.com/u/pranav-navandar/" target="_blank" rel="noreferrer"><strong>LeetCode</strong><span>Rating 1689 · top 15% ↗</span></a>
+            <a href="https://www.geeksforgeeks.org/profile/pranavnawhtn4" target="_blank" rel="noreferrer"><strong>GeeksforGeeks</strong><span>Problem-solving profile ↗</span></a>
+            <a href="https://www.codechef.com/users/shortpandav" target="_blank" rel="noreferrer"><strong>CodeChef</strong><span>2★ competitive programmer ↗</span></a>
+            <a href="https://github.com/gitpranaav" target="_blank" rel="noreferrer"><strong>GitHub</strong><span>Development activity ↗</span></a>
+            <a href="https://orcid.org/0009-0002-9399-0754" target="_blank" rel="noreferrer"><strong>ORCID</strong><span>0009-0002-9399-0754 ↗</span></a>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -211,21 +244,39 @@
       <div class="section-heading">
         <div>
           <p class="eyebrow">Research</p>
-          <h2 id="writing-title">Published work.</h2>
+          <h2 id="writing-title">Published &amp; protected.</h2>
         </div>
         <p>Peer-reviewed work presented at the 16th International Conference on Advances in Computing, Control and Telecommunication Technologies.</p>
       </div>
       <div class="publication-list">
         <a href="https://www.scopus.com/pages/publications/105034210907" target="_blank" rel="noreferrer">
           <span class="publication-year">2025</span>
-          <span><strong>A Survey on Machine Learning Techniques to Enhance Web Applications</strong><small>ACT 2025 · Scopus</small></span>
+          <span><strong>A Survey on Machine Learning Techniques to Enhance Web Application</strong><small>ACT 2025 · Vol. 1 · pp. 3406–3414 · Scopus</small><small class="publication-summary">A review of how machine learning strengthens web security, prediction, personalization, and user experience.</small></span>
           <span aria-hidden="true">↗</span>
         </a>
         <a href="https://www.scopus.com/pages/publications/105034903124" target="_blank" rel="noreferrer">
           <span class="publication-year">2025</span>
-          <span><strong>Alzheimer Detection using Deep Learning</strong><small>ACT 2025 · Scopus</small></span>
+          <span><strong>Alzheimer Detection using Deep Learning</strong><small>ACT 2025 · Vol. 2 · pp. 9607–9615 · Scopus</small><small class="publication-summary">An interpretable ensemble of CNN, VGG19, and ResNet50 models for MRI/CT classification, reporting 97.5% accuracy.</small></span>
           <span aria-hidden="true">↗</span>
         </a>
+      </div>
+      <div class="research-divider">
+        <p class="eyebrow">Patents</p>
+        <a class="text-link" href="https://orcid.org/0009-0002-9399-0754" target="_blank" rel="noreferrer">View ORCID <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="patent-grid">
+        <article class="patent-card">
+          <span>India · Published application</span>
+          <h3>A Self-Powered Energy Harvesting Hinge System for Smart Infrastructure and IoT Applications</h3>
+          <p>Converts door-hinge motion into stored electrical energy for sensor-driven, wirelessly monitored infrastructure.</p>
+          <small>Application 202521125128 · Publication 09/2026 · 27 Feb 2026</small>
+        </article>
+        <article class="patent-card">
+          <span>South Africa · Granted</span>
+          <h3>A System for Sarcasm Detection in Textual Communication Using Deep Learning Transformer Models</h3>
+          <p>A transformer-based system designed to identify contextual and semantic signals of sarcasm in text.</p>
+          <small>Patent 2025/10161 · Granted 29 Jul 2026</small>
+        </article>
       </div>
     </section>
   </main>
@@ -236,7 +287,7 @@
     <a class="footer-email" href="mailto:pranavnavandar10@gmail.com">pranavnavandar10@gmail.com <span aria-hidden="true">↗</span></a>
     <div class="footer-meta">
       <span>© <span id="copyright-year">2026</span> Pranav Navandar</span>
-      <span class="footer-links"><a href="https://www.linkedin.com/in/navandar/" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/gitpranaav" target="_blank" rel="noreferrer">GitHub</a><a href="https://leetcode.com/u/pranav-navandar/" target="_blank" rel="noreferrer">LeetCode</a></span>
+      <span class="footer-links"><a href="https://www.linkedin.com/in/navandar/" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/gitpranaav" target="_blank" rel="noreferrer">GitHub</a><a href="https://codolio.com/profile/allinone" target="_blank" rel="noreferrer">Codolio</a><a href="https://leetcode.com/u/pranav-navandar/" target="_blank" rel="noreferrer">LeetCode</a></span>
       <a href="#top">Back to top ↑</a>
     </div>
   </footer>
