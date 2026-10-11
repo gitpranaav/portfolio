@@ -1,324 +1,244 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pranav Navandar | Software Developer</title>
-    <meta name="description" content="Portfolio of Pranav Navandar, Information Technology Undergrad & Software Developer.">
-    <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pranav Navandar is a software developer building intelligent products, dependable systems, and thoughtful developer tools.">
+  <meta name="theme-color" content="#f3f0e8">
+  <meta property="og:title" content="Pranav Navandar — Software Developer">
+  <meta property="og:description" content="Software, systems, and selected work by Pranav Navandar.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pranavnavandar.me/">
+  <link rel="canonical" href="https://pranavnavandar.me/">
+  <title>Pranav Navandar — Software Developer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="background-effects">
-        <div class="glow-orb orb-1"></div>
-        <div class="glow-orb orb-2"></div>
-    </div>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="#" class="logo">PN<span>.</span></a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#publications">Publications</a></li>
-            </ul>
-            <div class="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Pranav Navandar, home">
+      <span class="wordmark-mark" aria-hidden="true">PN</span>
+      <span>Pranav Navandar</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span>
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+      <a href="#activity">Activity</a>
+      <a href="#work">Work</a>
+      <a href="#profile">Profile</a>
+      <a href="#writing">Research</a>
     </nav>
+  </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="hero" class="hero-section">
-            <div class="hero-content">
-                <p class="greeting">Hi, I'm</p>
-                <h1 class="name">Pranav Navandar</h1>
-                <h2 class="title"><span class="typing-text"></span><span class="cursor">&nbsp;</span></h2>
-                <p class="summary">
-                    A passionate Information Technology undergraduate at Vishwakarma Institute of Technology. 
-                    I specialize in building scalable software, efficient algorithms, and intelligent systems.
-                </p>
-                <div class="social-links">
-                    <a href="https://github.com/gitpranaav" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/navandar/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://leetcode.com/u/pranav-navandar/" target="_blank" title="LeetCode"><i class="fas fa-code"></i></a>
-                    <a href="https://www.codechef.com/users/shortpandav" target="_blank" title="CodeChef"><i class="fas fa-laptop-code"></i></a>
-                    <a href="mailto:pranavnawandar12@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-                </div>
-                <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
-                </div>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Software developer · Pune, India</p>
+        <h1 id="hero-title">I build systems that make difficult work feel <em>simple.</em></h1>
+        <p class="hero-summary">Information Technology undergraduate at VIT Pune, working across intelligent applications, high-performance search, and full-stack product engineering.</p>
+        <div class="hero-actions" aria-label="Contact and profiles">
+          <a class="button button-primary" href="mailto:pranavnavandar10@gmail.com">Email me <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://www.linkedin.com/in/navandar/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://github.com/gitpranaav" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://leetcode.com/u/pranav-navandar/" target="_blank" rel="noreferrer">LeetCode <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="Current focus">
+        <span class="note-index">01 / NOW</span>
+        <p>Exploring the space between strong algorithms and useful products.</p>
+        <dl>
+          <div><dt>Studying</dt><dd>B.Tech, Information Technology</dd></div>
+          <div><dt>Graduating</dt><dd>2027</dd></div>
+          <div><dt>CGPA</dt><dd>9.25</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="activity section-shell" id="activity" aria-labelledby="activity-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Practice meets production</p>
+          <h2 id="activity-title">One calendar, two crafts.</h2>
+        </div>
+        <p>Daily LeetCode submissions and GitHub contributions, combined into a single view. Focus a day to see the source breakdown.</p>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-toolbar">
+          <div class="activity-stats" aria-live="polite">
+            <div><strong id="stat-dsa">—</strong><span>DSA submissions</span></div>
+            <div><strong id="stat-dev">—</strong><span>GitHub contributions</span></div>
+            <div><strong id="stat-days">—</strong><span>Active days</span></div>
+          </div>
+          <div class="activity-filters" aria-label="Activity view">
+            <button class="filter-button is-active" type="button" data-filter="combined" aria-pressed="true">Combined</button>
+            <button class="filter-button" type="button" data-filter="dsa" aria-pressed="false">DSA</button>
+            <button class="filter-button" type="button" data-filter="dev" aria-pressed="false">Dev</button>
+          </div>
+        </div>
+
+        <div class="heatmap-scroll" tabindex="0" aria-label="Scrollable contribution heatmap">
+          <div class="heatmap-frame">
+            <div class="month-labels" id="month-labels" aria-hidden="true"></div>
+            <div class="weekday-labels" aria-hidden="true"><span>Mon</span><span>Wed</span><span>Fri</span></div>
+            <div class="heatmap-grid is-loading" id="heatmap-grid" role="grid" aria-label="Contribution activity for the past year"></div>
+          </div>
+        </div>
+
+        <div class="activity-footer">
+          <div class="legend" aria-label="Heatmap legend">
+            <span><i class="legend-swatch legend-dsa"></i>DSA</span>
+            <span><i class="legend-swatch legend-dev"></i>Development</span>
+            <span><i class="legend-swatch legend-both"></i>Both</span>
+          </div>
+          <p id="activity-status">Loading live activity…</p>
+        </div>
+        <div class="activity-tooltip" id="activity-tooltip" role="tooltip" hidden></div>
+      </div>
+    </section>
+
+    <section class="work section-shell" id="work" aria-labelledby="work-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Selected work</p>
+          <h2 id="work-title">Built from the inside out.</h2>
+        </div>
+        <p>Three systems spanning algorithms, clinical workflows, and document intelligence.</p>
+      </div>
+
+      <div class="project-list">
+        <article class="project-row project-featured">
+          <div class="project-number" aria-hidden="true">01</div>
+          <div class="project-copy">
+            <p class="project-kicker">Search systems · C++</p>
+            <h3>AutoSearch Engine</h3>
+            <p>A typo-tolerant search core that combines Trie prefix retrieval, BK-tree approximate matching, and QWERTY-aware weighted distance to rank suggestions by intent.</p>
+            <ul class="project-points">
+              <li>Thread-safe O(1) LRU cache for recurring queries</li>
+              <li>Native REST API, benchmark CLI, and React interface</li>
+            </ul>
+            <div class="tag-list"><span>C++17</span><span>Trie</span><span>BK-tree</span><span>Docker</span></div>
+          </div>
+          <a class="project-link" href="https://github.com/gitpranaav/spellchecker" target="_blank" rel="noreferrer" aria-label="View AutoSearch Engine on GitHub">View repository <span aria-hidden="true">↗</span></a>
+          <div class="project-visual visual-search" aria-hidden="true">
+            <div class="search-demo">
+              <span class="search-query">seach</span><span class="search-cursor"></span>
+              <ol><li><b>search</b><small>keyboard distance 1</small></li><li>peach<small>edit distance 1</small></li><li>teach<small>edit distance 1</small></li></ol>
             </div>
-        </section>
+          </div>
+        </article>
 
-        <!-- About Section -->
-        <section id="about" class="section">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-grid">
-                <div class="about-text glass-card">
-                    <h3>Education</h3>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <h4>Bachelor of Technology in Information Technology</h4>
-                        <p class="timeline-subtitle">Vishwakarma Institute of Technology, Pune</p>
-                        <p class="timeline-date">Aug 2023 - May 2027</p>
-                        <p class="highlight-text">CGPA: 9.25</p>
-                    </div>
-                    
-                    <h3 class="mt-4">Certifications</h3>
-                    <ul class="cert-list">
-                        <li>
-                            <i class="fab fa-aws"></i>
-                            <div>
-                                <strong>AWS Academy Graduate - Cloud Foundations</strong>
-                                <span>Amazon Web Services (Nov 2025)</span>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-certificate"></i>
-                            <div>
-                                <strong>IBM DevOps and Software Engineering Professional</strong>
-                                <span>IBM / Coursera (Nov 2025)</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="achievements-card glass-card">
-                    <h3>Achievements</h3>
-                    <ul class="achievement-list">
-                        <li>
-                            <div class="ach-icon"><i class="fas fa-trophy"></i></div>
-                            <div class="ach-text">
-                                <strong>Best Pitch Award</strong>
-                                <span>COEP CSI INSPIRON 4.0 National Hackathon (2nd Prize, 400+ teams)</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ach-icon"><i class="fas fa-medal"></i></div>
-                            <div class="ach-text">
-                                <strong>Best Presentation Award</strong>
-                                <span>MVPM Heera Software Startup Hackathon (3rd Rank, 100+ teams)</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ach-icon"><i class="fas fa-code-branch"></i></div>
-                            <div class="ach-text">
-                                <strong>Competitive Programming</strong>
-                                <span>LeetCode: 500+ problems (Rating: 1689) | CodeChef: 2 Star</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <article class="project-row">
+          <div class="project-number" aria-hidden="true">02</div>
+          <div class="project-copy">
+            <p class="project-kicker">Clinical workflows · AI</p>
+            <h3>MediFlow</h3>
+            <p>An AI-assisted outpatient documentation platform that turns live consultations into structured EMR data while keeping clinical review and safety checks in the loop.</p>
+            <ul class="project-points">
+              <li>Live transcription with incremental EMR extraction</li>
+              <li>Allergy warnings, audit trails, and patient history</li>
+            </ul>
+            <div class="tag-list"><span>Next.js</span><span>TypeScript</span><span>MongoDB</span><span>Groq</span><span>Deepgram</span></div>
+          </div>
+          <a class="project-link" href="https://github.com/gitpranaav/Mediflow" target="_blank" rel="noreferrer" aria-label="View MediFlow on GitHub">View repository <span aria-hidden="true">↗</span></a>
+          <div class="project-visual visual-medical" aria-hidden="true">
+            <div class="pulse-line"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="record-card"><span>CONSULTATION 042</span><strong>Live transcript</strong><p>Structured notes updating…</p></div>
+          </div>
+        </article>
 
-            <!-- LeetCode Activity Map -->
-            <div class="leetcode-activity-wrapper glass-card mt-4">
-                <h3><i class="fas fa-chart-line" style="color: var(--accent-secondary); margin-right: 10px;"></i> LeetCode Activity Map</h3>
-                <div class="leetcode-map-container collapsed" id="leetcode-map">
-                    <div class="map-overlay">
-                        <button class="btn btn-primary" id="reveal-map-btn">Reveal Full Map</button>
-                    </div>
-                    <div class="map-scroll-wrapper">
-                        <div class="activity-grid" id="activity-grid">
-                            <!-- Grid generated via JS -->
-                        </div>
-                    </div>
-                </div>
-                <div class="map-legend">
-                    <span>Less</span>
-                    <div class="legend-box level-0"></div>
-                    <div class="legend-box level-1"></div>
-                    <div class="legend-box level-2"></div>
-                    <div class="legend-box level-3"></div>
-                    <div class="legend-box level-4"></div>
-                    <span>More</span>
-                </div>
-            </div>
-        </section>
+        <article class="project-row">
+          <div class="project-number" aria-hidden="true">03</div>
+          <div class="project-copy">
+            <p class="project-kicker">Document intelligence · Full stack</p>
+            <h3>AutomateInvoice</h3>
+            <p>A full-stack invoice workspace that ingests PDF attachments from email, structures them with multimodal AI, and makes financial records searchable and exportable.</p>
+            <ul class="project-points">
+              <li>Gmail-to-MongoDB PDF ingestion pipeline</li>
+              <li>Grounded AI queries, analytics, editing, and Excel export</li>
+            </ul>
+            <div class="tag-list"><span>React</span><span>Express</span><span>Python</span><span>MongoDB</span><span>Gemini</span></div>
+          </div>
+          <a class="project-link" href="https://github.com/gitpranaav/automateinvoice" target="_blank" rel="noreferrer" aria-label="View AutomateInvoice on GitHub">View repository <span aria-hidden="true">↗</span></a>
+          <div class="project-visual visual-invoice" aria-hidden="true">
+            <div class="invoice-sheet"><span>INVOICE</span><b>₹514,050</b><i></i><i></i><i></i><small>Processed · Ready to export</small></div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="section">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-container">
-                <div class="skill-category glass-card">
-                    <h3>Languages</h3>
-                    <div class="skill-tags">
-                        <span>C++</span>
-                        <span>Java</span>
-                        <span>Python</span>
-                        <span>TypeScript</span>
-                        <span>SQL</span>
-                    </div>
-                </div>
-                <div class="skill-category glass-card">
-                    <h3>Frameworks & Libraries</h3>
-                    <div class="skill-tags">
-                        <span>React</span>
-                        <span>Next.js</span>
-                        <span>LangChain</span>
-                    </div>
-                </div>
-                <div class="skill-category glass-card">
-                    <h3>Databases</h3>
-                    <div class="skill-tags">
-                        <span>MongoDB</span>
-                        <span>MySQL</span>
-                        <span>SQLite</span>
-                    </div>
-                </div>
-                <div class="skill-category glass-card">
-                    <h3>Tools</h3>
-                    <div class="skill-tags">
-                        <span>Git</span>
-                        <span>GitHub</span>
-                        <span>Docker</span>
-                        <span>Bash</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="profile section-shell" id="profile" aria-labelledby="profile-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Profile</p>
+          <h2 id="profile-title">The useful details.</h2>
+        </div>
+      </div>
 
-        <!-- Experience Section -->
-        <section id="experience" class="section">
-            <h2 class="section-title">Experience</h2>
-            <div class="experience-timeline">
-                <div class="timeline-item glass-card">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Project Intern</h3>
-                        <h4 class="company">Sumago Infotech <span>| Remote</span></h4>
-                        <p class="timeline-date">Sep 2025 - Nov 2025</p>
-                        <p class="project-name">AgriFlow -- Smart Agriculture & Water Resource Optimization System</p>
-                        <ul class="task-list">
-                            <li>Designed a deterministic Water Resource Optimization algorithm for crop planning.</li>
-                            <li>Built a Hybrid RAG pipeline integrating Pinecone with live APIs.</li>
-                            <li>Benchmarked response quality using Sentence-BERT semantic similarity, achieving an average score of 0.823 across a 100-query evaluation dataset.</li>
-                        </ul>
-                        <div class="tech-stack">
-                            <span>Next.js</span>
-                            <span>TypeScript</span>
-                            <span>LangChain</span>
-                            <span>SQLite</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div class="profile-grid">
+        <article class="profile-card profile-card-wide">
+          <span class="card-label">Experience</span>
+          <p class="card-date">Sep — Nov 2025</p>
+          <h3>Project Intern · Sumago Infotech</h3>
+          <p>Built AgriFlow, a smart agriculture and water-resource optimization system, including deterministic crop-planning logic and a hybrid RAG pipeline evaluated across a 100-query dataset.</p>
+        </article>
+        <article class="profile-card">
+          <span class="card-label">Education</span>
+          <h3>B.Tech in Information Technology</h3>
+          <p>Vishwakarma Institute of Technology, Pune<br>2023 — 2027 · CGPA 9.25</p>
+        </article>
+        <article class="profile-card">
+          <span class="card-label">Recognition</span>
+          <h3>Hackathon podiums</h3>
+          <p>Best Pitch, 2nd place at COEP CSI INSPIRON 4.0 (400+ teams). Best Presentation, 3rd place at MVPM Heera Software Startup Hackathon (100+ teams).</p>
+        </article>
+        <article class="profile-card profile-card-wide toolbox-card">
+          <span class="card-label">Toolbox</span>
+          <div class="toolbox-groups">
+            <div><h3>Core</h3><p>C++ · Java · Python · TypeScript · SQL</p></div>
+            <div><h3>Product</h3><p>React · Next.js · Node.js · Express</p></div>
+            <div><h3>Data & systems</h3><p>MongoDB · MySQL · SQLite · Docker · Git</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card glass-card">
-                    <div class="project-video-placeholder">
-                        <i class="fas fa-play-circle"></i>
-                        <p>Demo Video Coming Soon</p>
-                    </div>
-                    <div class="project-info">
-                        <div class="project-header">
-                            <h3>AutoSearch Engine</h3>
-                            <div class="project-links">
-                                <a href="https://github.com/gitpranaav/spellchecker" target="_blank"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                        <p class="project-desc">Text Autocomplete Service engineered with a spatial QWERTY keyboard proximity metric matrix into Weighted Levenshtein DP to rank mistyped candidates by physical keyboard proximity.</p>
-                        <ul class="task-list small">
-                            <li>Optimized query latency by 99% (sub-0.1ms) using a custom thread-safe C++ LRU Cache.</li>
-                            <li>Exposed a native C++ REST API containerized with Docker and a React Dashboard.</li>
-                        </ul>
-                        <div class="tech-stack mt-auto">
-                            <span>C++20</span>
-                            <span>React</span>
-                            <span>Docker</span>
-                            <span>DP & Tries</span>
-                        </div>
-                    </div>
-                </div>
+    <section class="writing section-shell" id="writing" aria-labelledby="writing-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Research</p>
+          <h2 id="writing-title">Published work.</h2>
+        </div>
+        <p>Peer-reviewed work presented at the 16th International Conference on Advances in Computing, Control and Telecommunication Technologies.</p>
+      </div>
+      <div class="publication-list">
+        <a href="https://www.scopus.com/pages/publications/105034210907" target="_blank" rel="noreferrer">
+          <span class="publication-year">2025</span>
+          <span><strong>A Survey on Machine Learning Techniques to Enhance Web Applications</strong><small>ACT 2025 · Scopus</small></span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a href="https://www.scopus.com/pages/publications/105034903124" target="_blank" rel="noreferrer">
+          <span class="publication-year">2025</span>
+          <span><strong>Alzheimer Detection using Deep Learning</strong><small>ACT 2025 · Scopus</small></span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </main>
 
-                <!-- Project 2 -->
-                <div class="project-card glass-card">
-                    <div class="project-video-placeholder">
-                        <i class="fas fa-play-circle"></i>
-                        <p>Demo Video Coming Soon</p>
-                    </div>
-                    <div class="project-info">
-                        <div class="project-header">
-                            <h3>MediFlow AI</h3>
-                            <div class="project-links">
-                                <a href="https://github.com/gitpranaav/Mediflow" target="_blank"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                        <p class="project-desc">A Clinical Documentation Platform designed to streamline medical workflows and enhance patient care through AI assistance.</p>
-                        <ul class="task-list small">
-                            <li>Implemented real-time consultation transcription and EMR generation.</li>
-                            <li>Developed clinical safety checks and audit trail.</li>
-                            <li>Reduced documentation time from 45% to nearly 20%.</li>
-                        </ul>
-                        <div class="tech-stack mt-auto">
-                            <span>Next.js</span>
-                            <span>React</span>
-                            <span>TypeScript</span>
-                            <span>MongoDB</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Publications Section -->
-        <section id="publications" class="section">
-            <h2 class="section-title">Publications</h2>
-            <div class="publications-list">
-                <div class="publication-item glass-card">
-                    <div class="pub-icon"><i class="fas fa-book-open"></i></div>
-                    <div class="pub-content">
-                        <h3>A Survey on Machine Learning Techniques to Enhance Web Applications</h3>
-                        <p class="pub-venue">16th International Conference on Advances in Computing Control and Telecommunication Technologies (ACT 2025)</p>
-                        <p class="pub-authors">Navandar P., Vayadande K., Pimple D., ...Tomar P., Soman I.</p>
-                        <a href="https://www.scopus.com/pages/publications/105034210907" target="_blank" class="pub-link">View on Scopus <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-                <div class="publication-item glass-card mt-3">
-                    <div class="pub-icon"><i class="fas fa-brain"></i></div>
-                    <div class="pub-content">
-                        <h3>Alzheimer Detection using Deep Learning</h3>
-                        <p class="pub-venue">16th International Conference on Advances in Computing Control and Telecommunication Technologies (ACT 2025)</p>
-                        <p class="pub-authors">Navandar P., Jadhav R., Pimple D., ...Tomar P., Soman I.</p>
-                        <p class="pub-desc">Proposed a CNN-based deep learning framework for automated Alzheimer's disease detection using MRI scans.</p>
-                        <a href="https://www.scopus.com/pages/publications/105034903124" target="_blank" class="pub-link">View on Scopus <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer id="contact">
-            <div class="footer-content">
-                <h2>Let's Connect</h2>
-                <p>I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
-                <a href="mailto:pranavnawandar12@gmail.com" class="btn btn-primary mt-3">Say Hello</a>
-                
-                <div class="social-links footer-socials mt-4">
-                    <a href="https://github.com/gitpranaav" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/navandar/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://leetcode.com/u/pranav-navandar/" target="_blank"><i class="fas fa-code"></i></a>
-                </div>
-                <p class="copyright">Designed & Built by Pranav Navandar &copy; 2026</p>
-            </div>
-        </footer>
-    </main>
-
-    <script src="script.js"></script>
+  <footer class="site-footer">
+    <p class="eyebrow">Have a problem worth solving?</p>
+    <h2>Let’s make something<br><em>useful.</em></h2>
+    <a class="footer-email" href="mailto:pranavnavandar10@gmail.com">pranavnavandar10@gmail.com <span aria-hidden="true">↗</span></a>
+    <div class="footer-meta">
+      <span>© <span id="copyright-year">2026</span> Pranav Navandar</span>
+      <span class="footer-links"><a href="https://www.linkedin.com/in/navandar/" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/gitpranaav" target="_blank" rel="noreferrer">GitHub</a><a href="https://leetcode.com/u/pranav-navandar/" target="_blank" rel="noreferrer">LeetCode</a></span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
 </body>
 </html>
