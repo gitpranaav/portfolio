@@ -199,7 +199,13 @@ async function loadActivity() {
     const updated = new Date(cache.updatedAt);
     const updatedLabel = Number.isNaN(updated.getTime())
       ? "recently"
-      : updated.toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
+      : updated.toLocaleString(undefined, {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
     statusText.textContent = `Cached daily · Updated ${updatedLabel}`;
   } catch {
     state.githubTotal = 0;
