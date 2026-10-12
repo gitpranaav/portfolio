@@ -1,7 +1,4 @@
-const SOURCES = {
-  github: "https://github-contributions-api.jogruber.de/v4/gitpranaav",
-  leetcode: "https://alfa-leetcode-api.onrender.com/pranav-navandar/calendar",
-};
+const ACTIVITY_CACHE = "data/activity.json";
 
 const PALETTES = {
   dsa: ["#ead1c3", "#dea382", "#c86f45", "#93472d"],
@@ -12,7 +9,7 @@ const state = {
   days: [],
   activity: new Map(),
   filter: "combined",
-  failures: [],
+  githubTotal: 0,
 };
 
 const grid = document.querySelector("#heatmap-grid");
@@ -85,36 +82,12 @@ async function fetchJson(url, timeoutMs = 15000) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetch(url, { signal: controller.signal, cache: "no-store" });
+    const response = await fetch(url, { signal: controller.signal, cache: "no-cache" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return await response.json();
   } finally {
     clearTimeout(timeout);
   }
-}
-
-function parseGitHub(data) {
-  const result = new Map();
-  const contributions = Array.isArray(data?.contributions) ? data.contributions : [];
-  contributions.forEach((entry) => {
-    if (typeof entry?.date === "string") result.set(entry.date, Number(entry.count) || 0);
-  });
-  return result;
-}
-
-function parseLeetCode(data) {
-  const result = new Map();
-  let calendar = data?.submissionCalendar ?? {};
-  if (typeof calendar === "string") {
-    try { calendar = JSON.parse(calendar); } catch { calendar = {}; }
-  }
-  Object.entries(calendar).forEach(([timestamp, count]) => {
-    const date = new Date(Number(timestamp) * 1000);
-    if (Number.isNaN(date.getTime())) return;
-    const key = date.toISOString().slice(0, 10);
-    result.set(key, (result.get(key) || 0) + (Number(count) || 0));
-  });
-  return result;
 }
 
 function intensity(value, type) {
@@ -195,46 +168,45 @@ function renderHeatmap() {
 }
 
 function updateStats() {
-  let dsa = 0;
-  let dev = 0;
   let activeDays = 0;
   state.days.forEach((date) => {
     const activity = state.activity.get(toDateKey(date)) || blankActivity();
-    dsa += activity.dsa;
-    dev += activity.dev;
     if (activity.dsa > 0 || activity.dev > 0) activeDays += 1;
   });
-  document.querySelector("#stat-dsa").textContent = dsa.toLocaleString();
-  document.querySelector("#stat-dev").textContent = dev.toLocaleString();
+  document.querySelector("#stat-dsa").textContent = "900+";
+  document.querySelector("#stat-dev").textContent = state.githubTotal.toLocaleString();
   document.querySelector("#stat-days").textContent = activeDays.toLocaleString();
 }
 
 async function loadActivity() {
-  const [githubResult, leetcodeResult] = await Promise.allSettled([
-    fetchJson(SOURCES.github),
-    fetchJson(SOURCES.leetcode),
-  ]);
+  try {
+    const cache = await fetchJson(ACTIVITY_CACHE);
+    if (!Array.isArray(cache?.days)) throw new Error("Invalid activity cache");
 
-  const github = githubResult.status === "fulfilled" ? parseGitHub(githubResult.value) : new Map();
-  const leetcode = leetcodeResult.status === "fulfilled" ? parseLeetCode(leetcodeResult.value) : new Map();
-  state.failures = [];
-  if (githubResult.status === "rejected") state.failures.push("GitHub");
-  if (leetcodeResult.status === "rejected") state.failures.push("LeetCode");
+    state.activity.clear();
+    cache.days.forEach((day) => {
+      if (typeof day?.date !== "string") return;
+      state.activity.set(day.date, {
+        dsa: Number(day.dsa) || 0,
+        dev: Number(day.dev) || 0,
+      });
+    });
+    state.githubTotal = cache.days.reduce((sum, day) => sum + (Number(day?.dev) || 0), 0);
 
-  state.days.forEach((date) => {
-    const key = toDateKey(date);
-    state.activity.set(key, { dsa: leetcode.get(key) || 0, dev: github.get(key) || 0 });
-  });
+    updateStats();
+    renderHeatmap();
 
-  updateStats();
-  renderHeatmap();
-
-  if (state.failures.length === 2) {
-    statusText.textContent = "Live sources are temporarily unavailable. Profile links still work.";
-  } else if (state.failures.length === 1) {
-    statusText.textContent = `${state.failures[0]} is temporarily unavailable · Showing the remaining live source`;
-  } else {
-    statusText.textContent = `Live data · Updated ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+    const updated = new Date(cache.updatedAt);
+    const updatedLabel = Number.isNaN(updated.getTime())
+      ? "recently"
+      : updated.toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
+    statusText.textContent = `Cached daily · Updated ${updatedLabel}`;
+  } catch {
+    state.githubTotal = 0;
+    updateStats();
+    renderHeatmap();
+    document.querySelector("#stat-dev").textContent = "—";
+    statusText.textContent = "Activity cache is temporarily unavailable. Profile links still work.";
   }
 }
 
