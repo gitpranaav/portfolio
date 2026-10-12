@@ -1,7 +1,12 @@
 name: Refresh activity cache
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/refresh-activity.yml"
   schedule:
+    # 07:47 Asia/Kolkata; scheduled workflows use UTC.
     - cron: "17 2 * * *"
   workflow_dispatch:
 
