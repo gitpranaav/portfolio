@@ -6,8 +6,15 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CACHE_PATH = resolve(ROOT, "data", "activity.json");
 const SOURCES = {
   github: "https://github-contributions-api.jogruber.de/v4/gitpranaav",
-  leetcode: "https://alfa-leetcode-api.onrender.com/pranav-navandar/calendar",
+  leetcode: "https://leetcode.com/graphql",
 };
+const LEETCODE_QUERY = `
+  query userProfileCalendar($username: String!) {
+    matchedUser(username: $username) {
+      userCalendar { submissionCalendar }
+    }
+  }
+`;
 
 function dateKey(date) {
   return date.toISOString().slice(0, 10);
@@ -25,9 +32,14 @@ function dateRange() {
   return dates;
 }
 
-async function fetchOnce(url) {
+async function fetchOnce(url, options = {}) {
   const response = await fetch(url, {
-    headers: { Accept: "application/json", "User-Agent": "gitpranaav-portfolio-cache" },
+    ...options,
+    headers: {
+      Accept: "application/json",
+      "User-Agent": "gitpranaav-portfolio-cache",
+      ...options.headers,
+    },
     signal: AbortSignal.timeout(45_000),
   });
   if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}`);
@@ -45,7 +57,7 @@ function parseGitHub(data) {
 
 function parseLeetCode(data) {
   const result = new Map();
-  let calendar = data?.submissionCalendar;
+  let calendar = data?.data?.matchedUser?.userCalendar?.submissionCalendar;
   if (calendar == null) throw new Error("LeetCode response has no submission calendar");
   if (typeof calendar === "string") calendar = JSON.parse(calendar);
   if (typeof calendar !== "object" || Array.isArray(calendar)) {
@@ -74,7 +86,17 @@ const previousDays = new Map(
 );
 const [githubResult, leetcodeResult] = await Promise.allSettled([
   fetchOnce(SOURCES.github).then(parseGitHub),
-  fetchOnce(SOURCES.leetcode).then(parseLeetCode),
+  fetchOnce(SOURCES.leetcode, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Referer: "https://leetcode.com/u/pranav-navandar/",
+    },
+    body: JSON.stringify({
+      query: LEETCODE_QUERY,
+      variables: { username: "pranav-navandar" },
+    }),
+  }).then(parseLeetCode),
 ]);
 
 if (githubResult.status === "rejected" && leetcodeResult.status === "rejected") {
