@@ -2,8 +2,8 @@ name: Refresh activity cache
 
 on:
   schedule:
-    # 22:45 Asia/Kolkata; scheduled workflows use UTC.
-    - cron: "15 17 * * *"
+    # 23:30 Asia/Kolkata; scheduled workflows use UTC.
+    - cron: "0 18 * * *"
   workflow_dispatch:
 
 permissions:
