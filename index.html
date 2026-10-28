@@ -12,8 +12,19 @@
   <link rel="canonical" href="https://pranavnavandar.me/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=1">
   <title>Pranav Navandar — Software Developer</title>
-  <link rel="stylesheet" href="style.css?v=portfolio-redesign-5">
-  <script src="script.js?v=portfolio-redesign-5" defer></script>
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("portfolio-theme");
+        const theme = savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css?v=portfolio-redesign-8">
+  <script src="script.js?v=portfolio-redesign-8" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -23,16 +34,22 @@
       <span class="wordmark-mark" aria-hidden="true">PN</span>
       <span>Pranav Navandar</span>
     </a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <span></span><span></span>
-      <span class="sr-only">Toggle navigation</span>
-    </button>
-    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-      <a href="#activity">Activity</a>
-      <a href="#work">Work</a>
-      <a href="#profile">Profile</a>
-      <a href="#writing">Research</a>
-    </nav>
+    <div class="header-actions">
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="#activity">Activity</a>
+        <a href="#work">Work</a>
+        <a href="#profile">Profile</a>
+        <a href="#writing">Research</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z"></path></svg>
+      </button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span>
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+    </div>
   </header>
 
   <main id="main">
@@ -99,12 +116,8 @@
     </section>
 
     <section class="work section-shell" id="work" aria-labelledby="work-title">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Selected work</p>
-          <h2 id="work-title">Built from the inside out.</h2>
-        </div>
-        <p>Three systems spanning algorithms, clinical workflows, and document intelligence.</p>
+      <div class="section-heading section-heading-simple">
+        <h2 id="work-title">My projects</h2>
       </div>
 
       <div class="project-list">
@@ -151,8 +164,29 @@
           </div>
           <a class="project-link" href="https://github.com/gitpranaav/Mediflow" target="_blank" rel="noreferrer" aria-label="View MediFlow on GitHub">View repository <span aria-hidden="true">↗</span></a>
           <div class="project-visual visual-medical" aria-hidden="true">
-            <div class="pulse-line"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <div class="record-card"><span>CONSULTATION 042</span><strong>Live transcript</strong><p>Structured notes updating…</p></div>
+            <div class="mediflow-demo" data-mediflow-demo>
+              <div class="mediflow-status">
+                <span><i class="live-dot"></i>Live consultation</span>
+                <span class="audio-bars"><i></i><i></i><i></i><i></i></span>
+              </div>
+              <div class="dialogue-feed">
+                <div class="dialogue-turn is-doctor" data-dialogue="doctor">
+                  <span class="speaker-avatar">DR</span>
+                  <p><b>Doctor</b><span data-dialogue-text></span></p>
+                </div>
+                <div class="dialogue-turn is-patient" data-dialogue="patient">
+                  <span class="speaker-avatar">PT</span>
+                  <p><b>Patient</b><span data-dialogue-text></span></p>
+                </div>
+              </div>
+              <div class="field-heading"><span>Structured EMR</span><small>Auto-updating</small></div>
+              <div class="clinical-fields">
+                <div data-field-card="complaint"><span>Complaint</span><strong data-field="complaint">—</strong></div>
+                <div data-field-card="duration"><span>Duration</span><strong data-field="duration">—</strong></div>
+                <div data-field-card="allergies"><span>Allergies</span><strong data-field="allergies">—</strong></div>
+                <div data-field-card="respiratory"><span>Respiratory</span><strong data-field="respiratory">—</strong></div>
+              </div>
+            </div>
           </div>
         </article>
 
@@ -176,14 +210,7 @@
       </div>
     </section>
 
-    <section class="profile section-shell" id="profile" aria-labelledby="profile-title">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Profile</p>
-          <h2 id="profile-title">The useful details.</h2>
-        </div>
-      </div>
-
+    <section class="profile section-shell section-shell-compact" id="profile" aria-label="Profile">
       <div class="profile-grid">
         <article class="profile-card profile-card-wide">
           <span class="card-label">Experience</span>

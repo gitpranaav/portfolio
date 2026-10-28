@@ -1,8 +1,8 @@
 const ACTIVITY_CACHE = "data/activity.json";
 
 const PALETTES = {
-  dsa: ["#ead1c3", "#dea382", "#c86f45", "#93472d"],
-  dev: ["#c7dcd2", "#86b39f", "#398066", "#124433"],
+  dsa: ["var(--dsa-1)", "var(--dsa-2)", "var(--dsa-3)", "var(--dsa-4)"],
+  dev: ["var(--dev-1)", "var(--dev-2)", "var(--dev-3)", "var(--dev-4)"],
 };
 
 const state = {
@@ -91,7 +91,7 @@ async function fetchJson(url, timeoutMs = 15000) {
 }
 
 function intensity(value, type) {
-  if (value <= 0) return "rgba(23, 32, 27, .075)";
+  if (value <= 0) return "var(--activity-empty)";
   const level = value <= 2 ? 0 : value <= 5 ? 1 : value <= 9 ? 2 : 3;
   return PALETTES[type][level];
 }
@@ -103,7 +103,7 @@ function cellBackground(activity) {
   if (state.filter === "dsa") return dsaColor;
   if (state.filter === "dev") return devColor;
   if (activity.dsa > 0 && activity.dev > 0) {
-    return `linear-gradient(135deg, ${dsaColor} 0 48%, #f3f0e8 48% 52%, ${devColor} 52% 100%)`;
+    return `linear-gradient(135deg, ${dsaColor} 0 48%, var(--paper) 48% 52%, ${devColor} 52% 100%)`;
   }
   return activity.dsa > 0 ? dsaColor : devColor;
 }
@@ -244,6 +244,34 @@ function setupNavigation() {
   }));
 }
 
+function setupThemeToggle() {
+  const toggle = document.querySelector(".theme-toggle");
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+  const applyTheme = (theme, persist = false) => {
+    document.documentElement.dataset.theme = theme;
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    const label = `Switch to ${nextTheme} mode`;
+    toggle.setAttribute("aria-label", label);
+    toggle.title = label;
+    themeColor?.setAttribute("content", theme === "dark" ? "#111713" : "#f3f0e8");
+    if (persist) {
+      try { localStorage.setItem("portfolio-theme", theme); } catch { /* Storage can be unavailable. */ }
+    }
+  };
+
+  applyTheme(document.documentElement.dataset.theme || (media.matches ? "dark" : "light"));
+  toggle.addEventListener("click", () => {
+    applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true);
+  });
+  media.addEventListener("change", (event) => {
+    let hasSavedTheme = false;
+    try { hasSavedTheme = Boolean(localStorage.getItem("portfolio-theme")); } catch { /* Use system theme. */ }
+    if (!hasSavedTheme) applyTheme(event.matches ? "dark" : "light");
+  });
+}
+
 function setupSearchDemo() {
   const demo = document.querySelector("[data-search-demo]");
   if (!demo) return;
@@ -321,9 +349,109 @@ function setupSearchDemo() {
   run();
 }
 
+function setupMediFlowDemo() {
+  const demo = document.querySelector("[data-mediflow-demo]");
+  if (!demo) return;
+
+  const turns = {
+    doctor: demo.querySelector('[data-dialogue="doctor"]'),
+    patient: demo.querySelector('[data-dialogue="patient"]'),
+  };
+  const fields = Object.fromEntries(
+    Array.from(demo.querySelectorAll("[data-field]")).map((field) => [field.dataset.field, field]),
+  );
+  const conversation = [
+    {
+      speaker: "doctor",
+      text: "What brings you in today?",
+      updates: {},
+    },
+    {
+      speaker: "patient",
+      text: "A dry cough and fever for three days.",
+      updates: { complaint: "Dry cough + fever", duration: "3 days" },
+    },
+    {
+      speaker: "doctor",
+      text: "Any allergies or breathing trouble?",
+      updates: {},
+    },
+    {
+      speaker: "patient",
+      text: "No allergies. My breathing feels normal.",
+      updates: { allergies: "None reported", respiratory: "Normal" },
+    },
+  ];
+
+  const reset = () => {
+    Object.values(turns).forEach((turn) => {
+      turn.classList.remove("is-active", "is-transcribing");
+      turn.querySelector("[data-dialogue-text]").textContent = "";
+    });
+    Object.values(fields).forEach((field) => { field.textContent = "—"; });
+    demo.querySelectorAll("[data-field-card]").forEach((card) => card.classList.remove("is-updating"));
+  };
+
+  const applyUpdates = async (updates, wait) => {
+    for (const [name, value] of Object.entries(updates)) {
+      const field = fields[name];
+      const card = field.closest("[data-field-card]");
+      field.textContent = value;
+      card.classList.remove("is-updating");
+      void card.offsetWidth;
+      card.classList.add("is-updating");
+      await wait(180);
+    }
+  };
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    turns.doctor.classList.add("is-active");
+    turns.patient.classList.add("is-active");
+    turns.doctor.querySelector("[data-dialogue-text]").textContent = conversation[2].text;
+    turns.patient.querySelector("[data-dialogue-text]").textContent = conversation[3].text;
+    fields.complaint.textContent = "Dry cough + fever";
+    fields.duration.textContent = "3 days";
+    fields.allergies.textContent = "None reported";
+    fields.respiratory.textContent = "Normal";
+    return;
+  }
+
+  const wait = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+  const transcribe = async (item) => {
+    const turn = turns[item.speaker];
+    const text = turn.querySelector("[data-dialogue-text]");
+    Object.values(turns).forEach((candidate) => candidate.classList.remove("is-active"));
+    turn.classList.add("is-active", "is-transcribing");
+    text.textContent = "";
+    for (const character of item.text) {
+      text.textContent += character;
+      await wait(character === " " ? 18 : 30);
+    }
+    turn.classList.remove("is-transcribing");
+    await wait(220);
+    await applyUpdates(item.updates, wait);
+    await wait(420);
+  };
+
+  const run = async () => {
+    await wait(650);
+    while (demo.isConnected) {
+      reset();
+      for (const item of conversation) {
+        while (document.hidden) await wait(500);
+        await transcribe(item);
+      }
+      await wait(1800);
+    }
+  };
+  run();
+}
+
 renderSkeleton();
 setupFilters();
 setupNavigation();
+setupThemeToggle();
 setupSearchDemo();
+setupMediFlowDemo();
 document.querySelector("#copyright-year").textContent = new Date().getFullYear();
 loadActivity();
