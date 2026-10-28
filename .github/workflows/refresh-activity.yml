@@ -1,8 +1,8 @@
-name: Refresh activity cache
+name: Refresh activity cache (alternate days)
 
 on:
   schedule:
-    # 23:30 Asia/Kolkata; scheduled workflows use UTC.
+    # Triggered daily at 23:30 Asia/Kolkata; the cadence step calls APIs only every other day.
     - cron: "0 18 * * *"
   workflow_dispatch:
 
@@ -26,10 +26,23 @@ jobs:
         with:
           node-version: 20
 
+      - name: Check alternate-day cadence
+        id: cadence
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "refresh=true" >> "$GITHUB_OUTPUT"
+            echo "Manual run: refreshing now."
+          else
+            node -e "const fs=require('fs'); const cache=JSON.parse(fs.readFileSync('data/activity.json','utf8')); const age=Date.now()-Date.parse(cache.updatedAt); const refresh=!Number.isFinite(age)||age>=36*60*60*1000; fs.appendFileSync(process.env.GITHUB_OUTPUT, 'refresh='+refresh+'\n'); console.log(refresh ? 'Cache is old enough: refreshing.' : 'Cache is under 36 hours old: skipping APIs today.');"
+          fi
+
       - name: Fetch and normalize activity
+        if: steps.cadence.outputs.refresh == 'true'
         run: node scripts/update-activity-cache.mjs
 
       - name: Commit refreshed cache
+        if: steps.cadence.outputs.refresh == 'true'
         run: |
           if git diff --quiet -- data/activity.json; then
             echo "Activity cache is already current."

@@ -12,8 +12,8 @@
   <link rel="canonical" href="https://pranavnavandar.me/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=1">
   <title>Pranav Navandar — Software Developer</title>
-  <link rel="stylesheet" href="style.css?v=portfolio-redesign-4">
-  <script src="script.js?v=portfolio-redesign-4" defer></script>
+  <link rel="stylesheet" href="style.css?v=portfolio-redesign-5">
+  <script src="script.js?v=portfolio-redesign-5" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -122,9 +122,17 @@
           </div>
           <a class="project-link" href="https://github.com/gitpranaav/spellchecker" target="_blank" rel="noreferrer" aria-label="View AutoSearch Engine on GitHub">View repository <span aria-hidden="true">↗</span></a>
           <div class="project-visual visual-search" aria-hidden="true">
-            <div class="search-demo">
-              <span class="search-query">seach</span><span class="search-cursor"></span>
-              <ol><li><b>search</b><small>keyboard distance 1</small></li><li>peach<small>edit distance 1</small></li><li>teach<small>edit distance 1</small></li></ol>
+            <div class="search-demo" data-search-demo data-mode="fuzzy">
+              <div class="search-demo-meta">
+                <span class="search-mode" data-search-mode>BK-tree · QWERTY DP</span>
+                <span class="search-latency" data-search-latency>0.08 ms</span>
+              </div>
+              <div class="search-input-line"><span class="search-prompt">query /</span><span class="search-query" data-search-query>gut</span><span class="search-cursor"></span></div>
+              <ol data-search-results>
+                <li class="is-visible"><b>hut</b><small>adjacent key · 0.50</small></li>
+                <li class="is-visible"><b>but</b><small>near key · 0.60</small></li>
+                <li class="is-visible"><b>nut</b><small>far key · 0.90</small></li>
+              </ol>
             </div>
           </div>
         </article>

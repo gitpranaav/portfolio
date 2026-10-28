@@ -269,12 +269,21 @@ button { font: inherit; }
 .project-visual { align-self: end; min-height: 265px; position: relative; overflow: hidden; background: var(--paper-deep); border: 1px solid var(--line); }
 .visual-search { display: grid; place-items: center; padding: 28px; background: #19251f; color: #f8f3e8; }
 .search-demo { width: 100%; font-family: var(--mono); }
+.search-demo-meta { display: flex; justify-content: space-between; align-items: center; gap: 14px; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
+.search-mode { color: #dea382; transition: color .25s; }
+.search-latency { color: #9caaa2; font-variant-numeric: tabular-nums; }
+.search-demo[data-mode="prefix"] .search-mode { color: #86b39f; }
+.search-demo[data-mode="cache"] .search-mode { color: #a7d7bd; }
+.search-input-line { min-height: 58px; padding: 18px 0 14px; display: flex; align-items: baseline; border-bottom: 1px solid rgba(255,255,255,.16); }
+.search-prompt { margin-right: 10px; color: #718178; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; }
 .search-query { font-size: 25px; letter-spacing: -.04em; }
 .search-cursor { display: inline-block; width: 2px; height: 24px; margin-left: 3px; vertical-align: -4px; background: var(--clay); animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
-.search-demo ol { margin: 24px 0 0; padding: 0; list-style: none; }
-.search-demo li { display: flex; justify-content: space-between; padding: 9px 0; border-top: 1px solid rgba(255,255,255,.13); font-size: 11px; }
-.search-demo small { color: #9caaa2; }
+.search-demo ol { min-height: 104px; margin: 10px 0 0; padding: 0; list-style: none; }
+.search-demo li { padding: 9px 0; display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid rgba(255,255,255,.1); font-size: 11px; opacity: 0; transform: translateY(7px); transition: opacity .25s, transform .25s; }
+.search-demo li.is-visible { opacity: 1; transform: translateY(0); }
+.search-demo li b { font-weight: 650; }
+.search-demo small { color: #9caaa2; font-size: 9px; text-align: right; }
 .visual-medical { background: #dce9e3; display: flex; align-items: center; justify-content: center; }
 .pulse-line { position: absolute; top: 26px; left: 24px; right: 24px; height: 40px; display: flex; align-items: center; gap: 5px; }
 .pulse-line i { flex: 1; display: block; height: 1px; background: var(--forest); }

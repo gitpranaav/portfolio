@@ -206,7 +206,7 @@ async function loadActivity() {
           hour: "2-digit",
           minute: "2-digit",
         });
-    statusText.textContent = `Cached daily · Updated ${updatedLabel}`;
+    statusText.textContent = `Cached every 48h · Updated ${updatedLabel}`;
   } catch {
     state.githubTotal = 0;
     updateStats();
@@ -244,8 +244,86 @@ function setupNavigation() {
   }));
 }
 
+function setupSearchDemo() {
+  const demo = document.querySelector("[data-search-demo]");
+  if (!demo) return;
+
+  const query = demo.querySelector("[data-search-query]");
+  const mode = demo.querySelector("[data-search-mode]");
+  const latency = demo.querySelector("[data-search-latency]");
+  const rows = Array.from(demo.querySelectorAll("[data-search-results] li"));
+  const cases = [
+    {
+      query: "gut",
+      mode: "fuzzy",
+      label: "BK-tree · QWERTY DP",
+      latency: "0.08 ms",
+      results: [["hut", "adjacent key · 0.50"], ["but", "near key · 0.60"], ["nut", "far key · 0.90"]],
+    },
+    {
+      query: "comput",
+      mode: "prefix",
+      label: "Trie · exact prefix",
+      latency: "0.04 ms",
+      results: [["computation", "exact prefix"], ["computer", "exact prefix"], ["computing", "exact prefix"]],
+    },
+    {
+      query: "comput",
+      mode: "cache",
+      label: "LRU cache · hit",
+      latency: "<0.01 ms",
+      results: [["computation", "cached result"], ["computer", "cached result"], ["computing", "cached result"]],
+    },
+  ];
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const wait = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+  const showCase = async (item) => {
+    rows.forEach((row) => row.classList.remove("is-visible"));
+    query.textContent = "";
+    mode.textContent = "indexing…";
+    latency.textContent = "—";
+    demo.dataset.mode = item.mode;
+    await wait(220);
+
+    for (const character of item.query) {
+      query.textContent += character;
+      await wait(115);
+    }
+
+    await wait(180);
+    mode.textContent = item.label;
+    latency.textContent = item.latency;
+    item.results.forEach(([word, detail], index) => {
+      rows[index].querySelector("b").textContent = word;
+      rows[index].querySelector("small").textContent = detail;
+    });
+    for (const row of rows) {
+      row.classList.add("is-visible");
+      await wait(110);
+    }
+    await wait(1800);
+  };
+
+  const run = async () => {
+    let index = 0;
+    await wait(800);
+    while (demo.isConnected) {
+      if (document.hidden) {
+        await wait(600);
+        continue;
+      }
+      await showCase(cases[index]);
+      index = (index + 1) % cases.length;
+    }
+  };
+  run();
+}
+
 renderSkeleton();
 setupFilters();
 setupNavigation();
+setupSearchDemo();
 document.querySelector("#copyright-year").textContent = new Date().getFullYear();
 loadActivity();
