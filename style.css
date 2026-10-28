@@ -364,6 +364,19 @@ button { font: inherit; }
 .footer-links a:hover,
 .footer-meta > a:hover { color: var(--ink); }
 
+@media (min-width: 901px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: 72px 0 68px;
+    align-items: center;
+  }
+  .section-shell { padding: 72px 0; }
+  .section-heading { margin-bottom: 40px; }
+  .project-row { min-height: 370px; }
+  .site-footer { padding-top: 82px; }
+  .footer-meta { margin-top: 72px; }
+}
+
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; align-items: start; }
   .hero-note { max-width: 520px; }
