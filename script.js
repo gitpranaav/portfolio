@@ -405,6 +405,8 @@ function setupMediFlowDemo() {
   };
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    demo.classList.remove("is-room", "is-zoom");
+    demo.classList.add("is-screen");
     turns.doctor.classList.add("is-active");
     turns.patient.classList.add("is-active");
     turns.doctor.querySelector("[data-dialogue-text]").textContent = conversation[2].text;
@@ -434,14 +436,65 @@ function setupMediFlowDemo() {
   };
 
   const run = async () => {
-    await wait(650);
+    await wait(500);
     while (demo.isConnected) {
       reset();
+      demo.classList.remove("is-zoom", "is-screen");
+      demo.classList.add("is-room");
+      await wait(3000);
+      demo.classList.remove("is-room");
+      demo.classList.add("is-zoom");
+      await wait(1050);
+      demo.classList.remove("is-zoom");
+      demo.classList.add("is-screen");
+      await wait(350);
       for (const item of conversation) {
         while (document.hidden) await wait(500);
         await transcribe(item);
       }
       await wait(1800);
+    }
+  };
+  run();
+}
+
+function setupInvoiceDemo() {
+  const demo = document.querySelector("[data-invoice-demo]");
+  if (!demo) return;
+
+  const status = demo.querySelector("[data-invoice-status]");
+  const steps = Array.from(demo.querySelectorAll("[data-invoice-step]"));
+  const stages = [
+    { name: "email", label: "New invoice received", duration: 1900 },
+    { name: "extract", label: "Gemini is structuring the PDF", duration: 2200 },
+    { name: "store", label: "Verified record saved", duration: 1800 },
+    { name: "export", label: "Workbook ready to export", duration: 2200 },
+  ];
+
+  const renderStage = (stageName) => {
+    const activeIndex = stages.findIndex((stage) => stage.name === stageName);
+    demo.dataset.stage = stageName;
+    status.textContent = stages[activeIndex].label;
+    steps.forEach((step, index) => {
+      step.classList.toggle("is-active", index === activeIndex);
+      step.classList.toggle("is-done", index < activeIndex);
+    });
+  };
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    renderStage("store");
+    return;
+  }
+
+  const wait = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+  const run = async () => {
+    await wait(750);
+    while (demo.isConnected) {
+      for (const stage of stages) {
+        while (document.hidden) await wait(500);
+        renderStage(stage.name);
+        await wait(stage.duration);
+      }
     }
   };
   run();
@@ -453,5 +506,6 @@ setupNavigation();
 setupThemeToggle();
 setupSearchDemo();
 setupMediFlowDemo();
+setupInvoiceDemo();
 document.querySelector("#copyright-year").textContent = new Date().getFullYear();
 loadActivity();

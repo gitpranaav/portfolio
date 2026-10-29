@@ -357,7 +357,30 @@ button { font: inherit; }
 .search-demo li b { font-weight: 650; }
 .search-demo small { color: #9caaa2; font-size: 9px; text-align: right; }
 .visual-medical { background: var(--medical-bg); display: flex; align-items: center; justify-content: center; }
-.mediflow-demo { width: calc(100% - 34px); padding: 15px; background: var(--cream); border: 1px solid var(--line); box-shadow: 0 18px 55px rgba(28,101,76,.14); font-family: var(--sans); }
+.mediflow-demo { width: calc(100% - 30px); height: 235px; position: relative; font-family: var(--sans); perspective: 900px; }
+.clinic-scene,
+.doctor-screen { position: absolute; inset: 0; border: 1px solid var(--line); background: var(--cream); box-shadow: 0 18px 55px rgba(28,101,76,.14); }
+.clinic-scene { overflow: hidden; padding: 16px; opacity: 1; transform: scale(1); transform-origin: 51% 55%; transition: opacity .65s ease, transform 1s cubic-bezier(.2,.7,.2,1), filter .65s ease; }
+.clinic-scene::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 49.8%, color-mix(in srgb, var(--forest) 7%, transparent) 50%, transparent 50.2%); pointer-events: none; }
+.clinic-sign { position: relative; display: flex; align-items: center; gap: 7px; color: var(--forest); font: 600 7px/1 var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+.clinic-conversation { height: 158px; position: relative; display: grid; grid-template-columns: 1fr 76px 1fr; align-items: end; }
+.clinic-person { height: 112px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+.clinic-person b { margin-top: 6px; color: var(--muted); font: 600 7px/1 var(--mono); text-transform: uppercase; }
+.person-head { width: 25px; height: 25px; z-index: 1; border-radius: 50%; background: #d6aa8a; box-shadow: inset -5px 5px 0 rgba(88,55,40,.18); }
+.person-body { width: 55px; height: 52px; margin-top: -1px; border-radius: 24px 24px 6px 6px; background: var(--forest); }
+.clinic-patient .person-body { background: var(--clay); }
+.clinic-bubble { width: max-content; max-width: 115px; position: absolute; top: -4px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px 8px 8px 2px; background: var(--cream); color: var(--ink); font-size: 8px; line-height: 1.3; opacity: 0; transform: translateY(5px); }
+.clinic-doctor .clinic-bubble { left: 10px; animation: clinic-talk 5.2s ease-in-out infinite; }
+.clinic-patient .clinic-bubble { right: 10px; border-radius: 8px 8px 2px 8px; animation: clinic-talk 5.2s 1.7s ease-in-out infinite; }
+.clinic-desk { height: 34px; position: relative; border-top: 5px solid #b8956e; background: linear-gradient(90deg, transparent 9px, #b8956e 10px 14px, transparent 15px 60px, #b8956e 61px 65px, transparent 66px); }
+.clinic-laptop { width: 48px; height: 31px; position: absolute; left: 14px; bottom: 31px; display: grid; place-items: center; transform: skew(-5deg); border: 3px solid #33483e; border-radius: 3px; background: #dce9e1; box-shadow: 0 3px 0 #33483e; }
+.clinic-laptop i { color: var(--forest); font: 700 7px/1 var(--mono); }
+.screen-focus { display: block; text-align: center; color: var(--muted); font: 500 7px/1 var(--mono); letter-spacing: .04em; }
+.doctor-screen { padding: 15px; opacity: 0; transform: translate(-12%, 13%) scale(.24) rotateY(-8deg); transform-origin: 48% 54%; pointer-events: none; transition: opacity .5s ease, transform 1s cubic-bezier(.18,.75,.22,1); }
+.mediflow-demo.is-zoom .clinic-scene { opacity: .2; transform: scale(1.7); filter: blur(2px); }
+.mediflow-demo.is-zoom .doctor-screen,
+.mediflow-demo.is-screen .doctor-screen { opacity: 1; transform: translate(0, 0) scale(1) rotateY(0); }
+.mediflow-demo.is-screen .clinic-scene { opacity: 0; transform: scale(1.8); filter: blur(3px); }
 .mediflow-status { padding-bottom: 10px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); color: var(--forest); font: 600 8px/1 var(--mono); letter-spacing: .07em; text-transform: uppercase; }
 .mediflow-status > span { display: inline-flex; align-items: center; gap: 7px; }
 .live-dot { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; background: var(--forest); animation: live-status 1.8s ease-out infinite; }
@@ -385,12 +408,57 @@ button { font: inherit; }
 @keyframes audio-level { to { transform: scaleY(.45); opacity: .5; } }
 @keyframes live-status { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--forest) 45%, transparent); } 70%, 100% { box-shadow: 0 0 0 6px transparent; } }
 @keyframes field-update { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--forest) 35%, transparent); } 100% { box-shadow: 0 0 0 7px transparent; } }
-.visual-invoice { display: grid; place-items: center; background: #eadfcf; }
-.invoice-sheet { width: 72%; min-height: 210px; padding: 24px; transform: rotate(-2deg); background: var(--cream); box-shadow: 10px 14px 0 rgba(200,111,69,.17); }
-.invoice-sheet span { font: 600 9px/1 var(--mono); letter-spacing: .13em; }
-.invoice-sheet b { display: block; margin: 18px 0; font-size: 25px; letter-spacing: -.04em; }
-.invoice-sheet i { display: block; width: 100%; height: 1px; margin: 14px 0; background: var(--line); }
-.invoice-sheet small { display: block; margin-top: 25px; color: var(--forest); font: 600 8px/1 var(--mono); }
+@keyframes clinic-talk { 0%, 42%, 100% { opacity: 0; transform: translateY(5px); } 8%, 34% { opacity: 1; transform: translateY(0); } }
+.visual-invoice { display: grid; place-items: center; padding: 15px; background: #eadfcf; }
+.invoice-demo { width: 100%; height: 235px; padding: 14px; position: relative; overflow: hidden; border: 1px solid rgba(94,69,48,.19); background: var(--cream); box-shadow: 10px 14px 0 rgba(200,111,69,.14); font-family: var(--sans); }
+.invoice-demo-head { display: flex; justify-content: space-between; align-items: center; }
+.invoice-demo-head span { color: var(--ink); font: 650 8px/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+.invoice-demo-head small { color: var(--clay); font: 600 7px/1 var(--mono); }
+.invoice-pipeline { margin-top: 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+.invoice-pipeline span { padding-top: 6px; position: relative; border-top: 2px solid var(--line); color: var(--muted); font: 600 6px/1 var(--mono); text-transform: uppercase; transition: color .35s, border-color .35s; }
+.invoice-pipeline span i { margin-right: 3px; font-style: normal; opacity: .55; }
+.invoice-pipeline span.is-active { color: var(--clay); border-color: var(--clay); }
+.invoice-pipeline span.is-done { color: var(--forest); border-color: var(--forest); }
+.invoice-workspace { height: 125px; margin-top: 12px; position: relative; }
+.invoice-email,
+.invoice-extract,
+.invoice-record { position: absolute; inset: 0; opacity: 0; transform: translateY(9px) scale(.98); transition: opacity .4s ease, transform .45s ease; }
+.invoice-email { padding: 13px; display: grid; grid-template-columns: 29px 1fr; gap: 9px; border: 1px solid var(--line); background: var(--surface-soft); }
+.mail-avatar { width: 29px; height: 29px; display: grid; place-items: center; border-radius: 50%; background: var(--clay); color: #fff; font: 700 7px/1 var(--mono); }
+.invoice-email p { margin: 2px 0 0; }
+.invoice-email p b,
+.invoice-email p small { display: block; }
+.invoice-email p b { font-size: 9px; }
+.invoice-email p small { margin-top: 3px; color: var(--muted); font-size: 7px; }
+.invoice-email em { grid-column: 1 / -1; padding: 9px; display: flex; justify-content: space-between; border: 1px solid var(--line); background: var(--cream); font: 500 8px/1 var(--mono); font-style: normal; }
+.invoice-email em i { color: var(--clay); font: 700 7px/1 var(--mono); }
+.invoice-extract { display: grid; grid-template-columns: 44% 1fr; gap: 12px; align-items: center; }
+.mini-invoice { height: 121px; padding: 12px; position: relative; overflow: hidden; background: #fffdf8; border: 1px solid var(--line); box-shadow: 5px 6px 0 rgba(200,111,69,.1); }
+.mini-invoice span { font: 700 6px/1 var(--mono); letter-spacing: .11em; }
+.mini-invoice b { display: block; margin: 13px 0; font-size: 15px; }
+.mini-invoice > i { display: block; height: 1px; margin: 10px 0; background: var(--line); }
+.mini-invoice u { width: 100%; height: 2px; position: absolute; left: 0; top: 0; background: var(--clay); box-shadow: 0 0 8px var(--clay); animation: invoice-scan 1.5s ease-in-out infinite; }
+.extract-fields { display: grid; gap: 5px; }
+.extract-fields span { padding: 7px; border: 1px solid var(--line); color: var(--muted); font: 600 6px/1 var(--mono); text-transform: uppercase; }
+.extract-fields b { display: block; margin-top: 3px; color: var(--ink); font-size: 8px; text-transform: none; }
+.invoice-record { padding: 14px; display: grid; grid-template-columns: 32px 1fr; align-items: center; border: 1px solid color-mix(in srgb, var(--forest) 35%, var(--line)); background: color-mix(in srgb, var(--forest) 7%, var(--cream)); }
+.record-check { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: var(--forest); color: var(--on-accent); font-size: 12px; }
+.invoice-record p { margin: 0; display: grid; grid-template-columns: 1fr auto; }
+.invoice-record p small { grid-column: 1 / -1; color: var(--muted); font: 600 6px/1 var(--mono); }
+.invoice-record p b { margin-top: 5px; font-size: 10px; }
+.invoice-record p strong { margin-top: 5px; font-size: 11px; }
+.invoice-record div { grid-column: 1 / -1; margin-top: 12px; display: flex; gap: 5px; }
+.invoice-record div span { padding: 5px 7px; border: 1px solid color-mix(in srgb, var(--forest) 30%, var(--line)); color: var(--forest); font: 600 6px/1 var(--mono); text-transform: uppercase; }
+.invoice-export { width: calc(100% - 28px); padding: 9px 10px; position: absolute; left: 14px; bottom: 13px; display: flex; gap: 7px; align-items: center; border: 1px solid var(--line); background: var(--ink); color: var(--on-accent); opacity: 0; transform: translateY(12px); transition: opacity .4s, transform .4s; font: 500 6px/1 var(--mono); }
+.invoice-export span { color: color-mix(in srgb, var(--on-accent) 60%, transparent); }
+.invoice-export b { margin-left: auto; color: #efb68f; font-size: 7px; }
+.invoice-demo[data-stage="email"] [data-invoice-panel="email"],
+.invoice-demo[data-stage="extract"] [data-invoice-panel="extract"],
+.invoice-demo[data-stage="store"] [data-invoice-panel="record"],
+.invoice-demo[data-stage="export"] [data-invoice-panel="record"] { opacity: 1; transform: translateY(0) scale(1); }
+.invoice-demo[data-stage="export"] [data-invoice-panel="record"] { transform: translateY(-8px) scale(.96); opacity: .38; }
+.invoice-demo[data-stage="export"] .invoice-export { opacity: 1; transform: translateY(0); }
+@keyframes invoice-scan { 0%, 100% { top: 8px; opacity: .5; } 50% { top: 108px; opacity: 1; } }
 
 .profile-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line-strong); border-left: 1px solid var(--line-strong); }
 .profile-card { min-height: 260px; padding: 32px; border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }

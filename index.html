@@ -72,8 +72,8 @@
       }
     })();
   </script>
-  <link rel="stylesheet" href="style.css?v=portfolio-redesign-8">
-  <script src="script.js?v=portfolio-redesign-8" defer></script>
+  <link rel="stylesheet" href="style.css?v=portfolio-redesign-9">
+  <script src="script.js?v=portfolio-redesign-9" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -213,27 +213,45 @@
           </div>
           <a class="project-link" href="https://github.com/gitpranaav/Mediflow" target="_blank" rel="noreferrer" aria-label="View MediFlow on GitHub">View repository <span aria-hidden="true">↗</span></a>
           <div class="project-visual visual-medical" aria-hidden="true">
-            <div class="mediflow-demo" data-mediflow-demo>
-              <div class="mediflow-status">
-                <span><i class="live-dot"></i>Live consultation</span>
-                <span class="audio-bars"><i></i><i></i><i></i><i></i></span>
-              </div>
-              <div class="dialogue-feed">
-                <div class="dialogue-turn is-doctor" data-dialogue="doctor">
-                  <span class="speaker-avatar">DR</span>
-                  <p><b>Doctor</b><span data-dialogue-text></span></p>
+            <div class="mediflow-demo is-room" data-mediflow-demo>
+              <div class="clinic-scene" data-clinic-scene>
+                <div class="clinic-sign"><i class="live-dot"></i>Consultation in progress</div>
+                <div class="clinic-conversation">
+                  <div class="clinic-person clinic-doctor">
+                    <span class="clinic-bubble">What brings you in today?</span>
+                    <i class="person-head"></i><i class="person-body"></i><b>Doctor</b>
+                  </div>
+                  <div class="clinic-desk"><span class="clinic-laptop"><i>MF</i></span></div>
+                  <div class="clinic-person clinic-patient">
+                    <span class="clinic-bubble">A dry cough and fever.</span>
+                    <i class="person-head"></i><i class="person-body"></i><b>Patient</b>
+                  </div>
                 </div>
-                <div class="dialogue-turn is-patient" data-dialogue="patient">
-                  <span class="speaker-avatar">PT</span>
-                  <p><b>Patient</b><span data-dialogue-text></span></p>
-                </div>
+                <span class="screen-focus">Listening · structuring in real time</span>
               </div>
-              <div class="field-heading"><span>Structured EMR</span><small>Auto-updating</small></div>
-              <div class="clinical-fields">
-                <div data-field-card="complaint"><span>Complaint</span><strong data-field="complaint">—</strong></div>
-                <div data-field-card="duration"><span>Duration</span><strong data-field="duration">—</strong></div>
-                <div data-field-card="allergies"><span>Allergies</span><strong data-field="allergies">—</strong></div>
-                <div data-field-card="respiratory"><span>Respiratory</span><strong data-field="respiratory">—</strong></div>
+
+              <div class="doctor-screen" data-doctor-screen>
+                <div class="mediflow-status">
+                  <span><i class="live-dot"></i>Live consultation</span>
+                  <span class="audio-bars"><i></i><i></i><i></i><i></i></span>
+                </div>
+                <div class="dialogue-feed">
+                  <div class="dialogue-turn is-doctor" data-dialogue="doctor">
+                    <span class="speaker-avatar">DR</span>
+                    <p><b>Doctor</b><span data-dialogue-text></span></p>
+                  </div>
+                  <div class="dialogue-turn is-patient" data-dialogue="patient">
+                    <span class="speaker-avatar">PT</span>
+                    <p><b>Patient</b><span data-dialogue-text></span></p>
+                  </div>
+                </div>
+                <div class="field-heading"><span>Structured EMR</span><small>Auto-updating</small></div>
+                <div class="clinical-fields">
+                  <div data-field-card="complaint"><span>Complaint</span><strong data-field="complaint">—</strong></div>
+                  <div data-field-card="duration"><span>Duration</span><strong data-field="duration">—</strong></div>
+                  <div data-field-card="allergies"><span>Allergies</span><strong data-field="allergies">—</strong></div>
+                  <div data-field-card="respiratory"><span>Respiratory</span><strong data-field="respiratory">—</strong></div>
+                </div>
               </div>
             </div>
           </div>
@@ -253,7 +271,35 @@
           </div>
           <a class="project-link" href="https://github.com/gitpranaav/automateinvoice" target="_blank" rel="noreferrer" aria-label="View AutomateInvoice on GitHub">View repository <span aria-hidden="true">↗</span></a>
           <div class="project-visual visual-invoice" aria-hidden="true">
-            <div class="invoice-sheet"><span>INVOICE</span><b>₹514,050</b><i></i><i></i><i></i><small>Processed · Ready to export</small></div>
+            <div class="invoice-demo" data-invoice-demo data-stage="email">
+              <div class="invoice-demo-head">
+                <span data-invoice-status>New invoice received</span>
+                <small>AutomateInvoice</small>
+              </div>
+              <div class="invoice-pipeline">
+                <span data-invoice-step="email"><i>01</i>Gmail</span>
+                <span data-invoice-step="extract"><i>02</i>Gemini</span>
+                <span data-invoice-step="store"><i>03</i>MongoDB</span>
+                <span data-invoice-step="export"><i>04</i>Export</span>
+              </div>
+              <div class="invoice-workspace">
+                <div class="invoice-email" data-invoice-panel="email">
+                  <span class="mail-avatar">AP</span>
+                  <p><b>Acme Parts</b><small>Invoice for March order</small></p>
+                  <em>invoice_1048.pdf <i>PDF</i></em>
+                </div>
+                <div class="invoice-extract" data-invoice-panel="extract">
+                  <div class="mini-invoice"><span>INVOICE</span><b>₹514,050</b><i></i><i></i><i></i><u></u></div>
+                  <div class="extract-fields"><span>Vendor <b>Acme Parts</b></span><span>Total <b>₹514,050</b></span><span>Terms <b>NET 30</b></span></div>
+                </div>
+                <div class="invoice-record" data-invoice-panel="record">
+                  <span class="record-check">✓</span>
+                  <p><small>INV-1048</small><b>Acme Parts</b><strong>₹514,050</strong></p>
+                  <div><span>Structured</span><span>Verified</span><span>Stored</span></div>
+                </div>
+              </div>
+              <div class="invoice-export" data-invoice-export><span>Invoice Headers</span><span>Invoice Lines</span><b>invoices_export.xlsx ↓</b></div>
+            </div>
           </div>
         </article>
       </div>
